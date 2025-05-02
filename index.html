@@ -34,32 +34,36 @@
     </p>
   </section>
 
-  <section id="maze-game" style="text-align: center; padding: 2rem;">
+<section id="maze-game" style="text-align: center; padding: 2rem;">
   <h2 style="color: #e74c3c; font-family: 'Press Start 2P', cursive;">
     I will always find my way to you &lt;3
   </h2>
 
-  <canvas id="mazeCanvas" width="300" height="300" style="border: 2px solid #e74c3c; margin-top: 1rem;"></canvas>
+  <canvas id="mazeCanvas" width="400" height="400" style="border: 2px solid #e74c3c; margin-top: 1rem;"></canvas>
 </section>
 
 <script>
   const canvas = document.getElementById("mazeCanvas");
   const ctx = canvas.getContext("2d");
 
-  const gridSize = 6;
+  const gridSize = 8;
   const cellSize = 50;
 
   const maze = [
-    [1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 1, 1],
-    [1, 0, 1, 0, 0, 1],
-    [1, 0, 1, 1, 0, 1],
-    [1, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 0, 1]
+    [1,1,1,1,1,1,1,1],
+    [1,0,0,0,1,0,0,1],
+    [1,0,1,0,1,0,1,1],
+    [1,0,1,0,0,0,0,1],
+    [1,0,1,1,1,1,0,1],
+    [1,0,0,0,1,0,0,1],
+    [1,1,1,0,1,1,0,1],
+    [1,1,1,0,0,0,0,1],
   ];
 
   const path = [
-    [1,1], [1,2], [1,3], [2,3], [2,4], [3,4], [4,4], [4,3], [4,2], [4,1]
+    [1,1], [1,2], [1,3], [2,3], [3,3], [3,4], [3,5], [3,6],
+    [4,6], [5,6], [5,5], [5,4], [4,4], [4,5], [5,5], [6,5],
+    [7,5], [7,6], [7,7]
   ];
 
   function drawMaze() {
@@ -75,27 +79,29 @@
       }
     }
 
-    // Draw the start and end hearts
+    // Red heart at the destination
     ctx.font = "28px serif";
-    ctx.fillText("❤️", 1 * cellSize + 10, 1 * cellSize + 35);
-    ctx.fillText("❤️", 4 * cellSize + 10, 4 * cellSize + 35);
+    ctx.fillText("❤️", 7 * cellSize + 10, 7 * cellSize + 35);
   }
 
-let currentStep = 0;
+  let currentStep = 0;
 
-function animatePath() {
-  if (currentStep < path.length) {
-    const [y, x] = path[currentStep];
-    ctx.font = "28px serif";
-    ctx.fillText("❤️", x * cellSize + 10, y * cellSize + 35);
-    currentStep++;
-    setTimeout(animatePath, 300);
+  function animatePath() {
+    if (currentStep < path.length) {
+      drawMaze(); // clear and redraw maze
+      const [y, x] = path[currentStep];
+      ctx.font = "28px serif";
+      ctx.fillText("🧡", x * cellSize + 10, y * cellSize + 35);
+      ctx.fillText("❤️", 7 * cellSize + 10, 7 * cellSize + 35); // goal
+      currentStep++;
+      setTimeout(animatePath, 300);
+    }
   }
-}
 
-drawMaze();
-setTimeout(animatePath, 1000);
+  drawMaze();
+  setTimeout(animatePath, 1000);
 </script>
+
 
   <section id="timeline">
     <h2>Minecraft Lore Ahh</h2>

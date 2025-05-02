@@ -81,6 +81,51 @@
     </a>
   </p>
 </section>
+
+  <section id="minigame" style="text-align: center; padding: 2rem;">
+  <h2 style="color: #e74c3c;">💌 Do you wanna know how long we've been together?</h2>
+  
+  <div id="start-buttons" style="margin-top: 1.5rem;">
+    <button onclick="startLoading()" style="margin: 1rem; padding: 0.5rem 1rem; font-family: 'Press Start 2P', cursive;">Yes</button>
+    <button onclick="startLoading()" style="margin: 1rem; padding: 0.5rem 1rem; font-family: 'Press Start 2P', cursive;">I already know :)</button>
+  </div>
+
+  <div id="loading-screen" style="display: none; margin-top: 2rem;">
+    <p style="font-family: 'Press Start 2P', cursive;">⌛ Calculating... Loading your time together...</p>
+    <div id="loading-bar-container" style="width: 80%; height: 20px; background-color: #333; margin: 1rem auto; border: 2px solid #e74c3c;">
+      <div id="loading-bar" style="width: 0%; height: 100%; background-color: #e74c3c;"></div>
+    </div>
+  </div>
+
+  <div id="result" style="display: none; font-family: 'Press Start 2P', cursive; margin-top: 2rem;">
+    <p>You have been together for:</p>
+    <p style="color: #ff4d4d;">1 year and 6 months</p>
+    <p style="color: #ff9999;">— or —</p>
+    <p>18 months<br>78 weeks<br>547 days</p>
+  </div>
+</section>
+
+<script>
+  function startLoading() {
+    document.getElementById("start-buttons").style.display = "none";
+    document.getElementById("loading-screen").style.display = "block";
+
+    let loadingBar = document.getElementById("loading-bar");
+    let width = 0;
+
+    let interval = setInterval(() => {
+      if (width >= 100) {
+        clearInterval(interval);
+        document.getElementById("loading-screen").style.display = "none";
+        document.getElementById("result").style.display = "block";
+      } else {
+        width += 2;
+        loadingBar.style.width = width + "%";
+      }
+    }, 50);
+  }
+</script>
+  
     <!-- Undertale Home - background audio -->
     <audio autoplay loop controls hidden>
       <source src="Undertale OST_ 012 - Home.mp3" type="audio/mpeg" />
